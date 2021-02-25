@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Reproducible Research - Peer-graded Assignment: Course Project 1</title>
+
+<script src="RepData_PeerAssessment1_files/header-attrs-2.7/header-attrs.js"></script>
+<script src="RepData_PeerAssessment1_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="RepData_PeerAssessment1_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="RepData_PeerAssessment1_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="RepData_PeerAssessment1_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="RepData_PeerAssessment1_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="RepData_PeerAssessment1_files/navigation-1.1/tabsets.js"></script>
+<link href="RepData_PeerAssessment1_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="RepData_PeerAssessment1_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Reproducible Research - Peer-graded Assignment: Course Project 1</h1>
+
+</div>
+
+
+<div id="read-and-check-the-data" class="section level2">
+<h2>Read and check the data</h2>
+<p>1.Reading in the dataset</p>
+<pre class="r"><code>mydata&lt;-read.csv(&quot;activity.csv&quot;)</code></pre>
+<p>2.Checking the data</p>
+<pre class="r"><code>head(mydata, n=10)</code></pre>
+<pre><code>##    steps       date interval
+## 1     NA 2012-10-01        0
+## 2     NA 2012-10-01        5
+## 3     NA 2012-10-01       10
+## 4     NA 2012-10-01       15
+## 5     NA 2012-10-01       20
+## 6     NA 2012-10-01       25
+## 7     NA 2012-10-01       30
+## 8     NA 2012-10-01       35
+## 9     NA 2012-10-01       40
+## 10    NA 2012-10-01       45</code></pre>
+<pre class="r"><code>summary(mydata)</code></pre>
+<pre><code>##      steps            date              interval     
+##  Min.   :  0.00   Length:17568       Min.   :   0.0  
+##  1st Qu.:  0.00   Class :character   1st Qu.: 588.8  
+##  Median :  0.00   Mode  :character   Median :1177.5  
+##  Mean   : 37.38                      Mean   :1177.5  
+##  3rd Qu.: 12.00                      3rd Qu.:1766.2  
+##  Max.   :806.00                      Max.   :2355.0  
+##  NA&#39;s   :2304</code></pre>
+</div>
+<div id="plot-the-total-number-of-steps-taken-each-day" class="section level2">
+<h2>Plot the total number of steps taken each day</h2>
+<p>1.Aggregte steps by date</p>
+<pre class="r"><code>TotalsPerDay &lt;- aggregate(mydata$steps, list(mydata$date), FUN=sum)
+colnames(TotalsPerDay) &lt;- c(&quot;Date&quot;, &quot;Steps&quot;)
+head(TotalsPerDay, n=10)</code></pre>
+<pre><code>##          Date Steps
+## 1  2012-10-01    NA
+## 2  2012-10-02   126
+## 3  2012-10-03 11352
+## 4  2012-10-04 12116
+## 5  2012-10-05 13294
+## 6  2012-10-06 15420
+## 7  2012-10-07 11015
+## 8  2012-10-08    NA
+## 9  2012-10-09 12811
+## 10 2012-10-10  9900</code></pre>
+<p>2.Plot histogram of the total number of steps taken each day</p>
+<pre class="r"><code>install.packages(
+   &quot;ggplot2&quot;,
+   repos = c(&quot;http://rstudio.org/_packages&quot;,&quot;http://cran.rstudio.com&quot;),
+   dependencies=TRUE
+)</code></pre>
+<pre><code>## package &#39;ggplot2&#39; successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+##  C:\Users\x\AppData\Local\Temp\RtmpUTifqt\downloaded_packages</code></pre>
+<pre class="r"><code>library(ggplot2)
+
+g &lt;- ggplot(TotalsPerDay, aes(Steps))
+g &lt;- g + geom_histogram(boundary=0, binwidth=1000,col=&quot;black&quot;, fill=&quot;lightblue&quot;) + 
+         ggtitle(&quot;Total steps per day&quot;) + xlab(&quot;Steps&quot;) + ylab(&quot;Frequency&quot;)
+print(g)</code></pre>
+<p><img src="RepData_PeerAssessment1_files/figure-html/unnamed-chunk-4-1.png" /><!-- --></p>
+</div>
+<div id="mean-and-median-number-of-steps-taken-each-day" class="section level2">
+<h2>Mean and median number of steps taken each day</h2>
+<p>1.Calculate and report the mean</p>
+<pre class="r"><code>as.integer(mean(TotalsPerDay$Steps, na.rm=TRUE))</code></pre>
+<pre><code>## [1] 10766</code></pre>
+<p>2.Calculate and report the median</p>
+<pre class="r"><code>as.integer(median(TotalsPerDay$Steps, na.rm=TRUE))</code></pre>
+<pre><code>## [1] 10765</code></pre>
+</div>
+<div id="time-series-plot-of-the-average-number-of-steps-taken" class="section level2">
+<h2>Time series plot of the average number of steps taken</h2>
+<p>1.Time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</p>
+<pre class="r"><code>StepsByInterval &lt;- aggregate(steps~interval,data=mydata,FUN=mean,na.action=na.omit)
+head(StepsByInterval)</code></pre>
+<pre><code>##   interval     steps
+## 1        0 1.7169811
+## 2        5 0.3396226
+## 3       10 0.1320755
+## 4       15 0.1509434
+## 5       20 0.0754717
+## 6       25 2.0943396</code></pre>
+<pre class="r"><code>g &lt;- ggplot(StepsByInterval, aes(interval, steps))
+g &lt;- g + geom_line(col=&quot;blue&quot;) + ggtitle(&quot;Average number of steps per interval&quot;)+
+         xlab(&quot;5-minute interval&quot;) + ylab(&quot;Average number of steps&quot;)
+print(g)</code></pre>
+<p><img src="RepData_PeerAssessment1_files/figure-html/unnamed-chunk-7-1.png" /><!-- --></p>
+<p>2.The 5-minute interval, on average across all the days,that contains the maximum number of steps</p>
+<pre class="r"><code>StepsByInterval &lt;- aggregate(steps~interval,data=mydata,FUN=mean,na.action=na.omit)
+head(StepsByInterval)</code></pre>
+<pre><code>##   interval     steps
+## 1        0 1.7169811
+## 2        5 0.3396226
+## 3       10 0.1320755
+## 4       15 0.1509434
+## 5       20 0.0754717
+## 6       25 2.0943396</code></pre>
+<pre class="r"><code>StepsByInterval[which.max(StepsByInterval$steps), ]$interval</code></pre>
+<pre><code>## [1] 835</code></pre>
+</div>
+<div id="imputing-missing-data" class="section level2">
+<h2>Imputing missing data</h2>
+<p>1.Calculate and report the number of missing values</p>
+<pre class="r"><code>sum(is.na(mydata))</code></pre>
+<pre><code>## [1] 2304</code></pre>
+<p>2.Filling the missing (NA) values with mean values for intervals</p>
+<pre class="r"><code>ImputtedData &lt;- mydata
+na &lt;- is.na(ImputtedData$steps)
+mydata_nona &lt;- subset(mydata, !is.na(mydata$steps))
+meanval &lt;- tapply(mydata_nona$steps, mydata_nona$interval, mean, na.rm=TRUE, simplify=T)
+ImputtedData$steps[na] &lt;- meanval[as.character(ImputtedData$interval[na])]</code></pre>
+<p>3.Check the new dataset</p>
+<pre class="r"><code>head(ImputtedData)</code></pre>
+<pre><code>##       steps       date interval
+## 1 1.7169811 2012-10-01        0
+## 2 0.3396226 2012-10-01        5
+## 3 0.1320755 2012-10-01       10
+## 4 0.1509434 2012-10-01       15
+## 5 0.0754717 2012-10-01       20
+## 6 2.0943396 2012-10-01       25</code></pre>
+<pre class="r"><code>sum(is.na(ImputtedData))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>4.Plot histogram of the total number of steps taken each day, calculate and report the mean and median</p>
+<p>4.1.Aggregte steps by date</p>
+<pre class="r"><code>TotalsPerDay_I &lt;- aggregate(ImputtedData$steps, list(ImputtedData$date), FUN=sum)
+colnames(TotalsPerDay_I) &lt;- c(&quot;Date&quot;, &quot;Steps&quot;)
+head(TotalsPerDay_I, n=20)</code></pre>
+<pre><code>##          Date    Steps
+## 1  2012-10-01 10766.19
+## 2  2012-10-02   126.00
+## 3  2012-10-03 11352.00
+## 4  2012-10-04 12116.00
+## 5  2012-10-05 13294.00
+## 6  2012-10-06 15420.00
+## 7  2012-10-07 11015.00
+## 8  2012-10-08 10766.19
+## 9  2012-10-09 12811.00
+## 10 2012-10-10  9900.00
+## 11 2012-10-11 10304.00
+## 12 2012-10-12 17382.00
+## 13 2012-10-13 12426.00
+## 14 2012-10-14 15098.00
+## 15 2012-10-15 10139.00
+## 16 2012-10-16 15084.00
+## 17 2012-10-17 13452.00
+## 18 2012-10-18 10056.00
+## 19 2012-10-19 11829.00
+## 20 2012-10-20 10395.00</code></pre>
+<p>4.2.Plot histogram of the total number of steps taken each day</p>
+<pre class="r"><code>library(ggplot2)
+
+g &lt;- ggplot(TotalsPerDay_I, aes(Steps))
+g &lt;- g + geom_histogram(boundary=0, binwidth=1000,col=&quot;black&quot;, fill=&quot;lightblue&quot;) + 
+         ggtitle(&quot;Total steps per day&quot;) + xlab(&quot;Steps&quot;) + ylab(&quot;Frequency&quot;)
+print(g)</code></pre>
+<p><img src="RepData_PeerAssessment1_files/figure-html/unnamed-chunk-13-1.png" /><!-- --> 4.3.Calculate and report the mean</p>
+<pre class="r"><code>as.integer(mean(TotalsPerDay_I$Steps, na.rm=TRUE))</code></pre>
+<pre><code>## [1] 10766</code></pre>
+<p>4.4.Calculate and report the median</p>
+<pre class="r"><code>as.integer(median(TotalsPerDay_I$Steps, na.rm=TRUE))</code></pre>
+<pre><code>## [1] 10766</code></pre>
+<p>Imputing the data resulted in a more normal distribution. As missing data was replaced with the mean values, the median moved and become equal to the mean.</p>
+</div>
+<div id="differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
+<h2>Differences in activity patterns between weekdays and weekends</h2>
+<p>1.Create a new factor variable in the dataset with two levels - “weekday” and “weekend”</p>
+<pre class="r"><code>ImputtedData$date &lt;- as.Date(strptime(ImputtedData$date, format=&quot;%Y-%m-%d&quot;))
+ImputtedData$daytype &lt;- sapply(ImputtedData$date, function(x) {
+        if (weekdays(x) == &quot;Saturday&quot; | weekdays(x) ==&quot;Sunday&quot;) 
+                {y &lt;- &quot;Weekend&quot;} else 
+                {y &lt;- &quot;Weekday&quot;}
+                y
+        })
+head(ImputtedData) </code></pre>
+<pre><code>##       steps       date interval daytype
+## 1 1.7169811 2012-10-01        0 Weekday
+## 2 0.3396226 2012-10-01        5 Weekday
+## 3 0.1320755 2012-10-01       10 Weekday
+## 4 0.1509434 2012-10-01       15 Weekday
+## 5 0.0754717 2012-10-01       20 Weekday
+## 6 2.0943396 2012-10-01       25 Weekday</code></pre>
+<p>2.Make a panel plot containing of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis)</p>
+<pre class="r"><code>plotdata &lt;- aggregate(steps~interval + daytype, ImputtedData, mean, na.rm = TRUE)
+g&lt;- ggplot(plotdata, aes(x = interval , y = steps, color = daytype)) +
+       geom_line() +
+       labs(title = &quot;Average Number of steps taken by day type (weekday/weekend)&quot;, x = &quot;Interval&quot;, y = &quot;Number of steps&quot;) +
+       facet_wrap(~daytype, ncol = 1, nrow=2)
+print(g)</code></pre>
+<p><img src="RepData_PeerAssessment1_files/figure-html/unnamed-chunk-17-1.png" /><!-- --></p>
+</div>
+<div id="end" class="section level2">
+<h2>– // END // –</h2>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
